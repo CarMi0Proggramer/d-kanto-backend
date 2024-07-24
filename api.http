@@ -1,0 +1,90 @@
+GET http://localhost:3000/products/
+
+###
+GET http://localhost:3000/products/Jordan Coat
+
+###
+POST http://localhost:3000/products/
+Content-Type: application/json
+
+{
+    "name": "Marriage Bed",
+    "price": 239,
+    "urlimg": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgOynC8Wlpsw0Bqeu9XgL_xWo4nxHQhZZ4dGT9i8abpRt76fiz4NHpYaSqZ7i0bv4QkjDbVEr3vONohts7v6-CGGV2MJ1JSNKYF4zQLM331fxTfMvVltfqtQhp9ONiguhBrgg1FekNGqwehtiaBL_eoxon0Sm6Ope4onGNDvg1miN268AWFsQ_Z0itgNTF3/s320/bed.png",
+    "description": "This is a product that was created to prove my abilities by creating a pagination method",
+    "category": "FU",
+    "stock": 38
+}
+
+###
+POST https://d-kanto-backend.onrender.com/products/
+Content-Type: application/json
+
+{
+    "name": "Male Underwear Collection",
+    "price": 57,
+    "urlimg": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQVA6hceg8bFGbebdCBq_IXGI94CKzu37ChpalUaGfvhJWE21yR1LVMd3R0DrPWD08e1H_zGvN8H8z37jtuKUQeKkV_Ff_Fo6vvEmjfMPcMNW1GA-39cD8DcrYF0R0fiVE2DvIikIIWraG56jwmIihY4LX6UYji4ggBqSsRRmwBSdrK1_h7Mh44E4mQB9f/s1600/underwear-collection.png",
+    "description": "This is a product that was created to prove my abilities by creating a pagination method",
+    "category": "CL",
+    "stock": 180
+}
+
+###
+DELETE http://localhost:3000/products/587
+
+###
+PATCH http://localhost:3000/products/Apple iPhone 14
+Content-Type: application/json
+
+{
+    "rating": 4.8
+}
+
+### Admins
+POST http://localhost:3000/admins/signIn
+Content-Type: application/json
+
+{
+    "email": "carlosmiguelgarcesbasulto@gmail.com",
+    "password": "12345",
+    "company_key": "cm_dev06"
+}
+
+###
+POST http://localhost:3000/admins/signUp
+Content-Type: application/json
+
+{
+    "name": "carlos",
+    "email": "carlos-el-tanke@gmail.com",
+    "password": "carlos2006",
+    "company_key": "cm_dev06"
+}
+
+###
+POST http://localhost:3000/admins/logOut
+
+### users
+POST http://localhost:3000/users/signUp
+Content-Type: application/json
+
+{
+    "name": "carlos",
+    "email": "carlosmiguel@gmail.com",
+    "password": "carlos2006"
+}
+
+###
+POST http://localhost:3000/users/signIn
+Content-Type: application/json
+
+{
+    "email": "carlosmiguel@gmail.com",
+    "password": "carlos2006"
+}
+
+###
+POST http://localhost:3000/users/logOut
+
+### Payments
+GET  http://localhost:3000/purchases/
