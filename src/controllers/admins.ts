@@ -68,7 +68,7 @@ export class AdminController {
             res.status(200).cookie("access_token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV == 'production',
-                sameSite: "none",
+                sameSite: "lax",
                 maxAge: 2000 * 60 * 60
             }).json({ name: admin.name, email: admin.email});
         } catch (error) {
