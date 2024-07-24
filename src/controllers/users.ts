@@ -28,7 +28,7 @@ export class UserController {
             res.status(200).cookie("access_token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV == 'production',
-                sameSite: "lax",
+                sameSite: "none",
                 maxAge: 2000 * 60 * 60
             }).json({ name: user.name, email: user.email});
         } catch (error) {
