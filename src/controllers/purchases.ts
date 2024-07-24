@@ -35,7 +35,6 @@ export class PurchaseController {
 
         try {
             const session = await createCheckoutSession( data.lineItems );
-            console.log(session);
             res.status(200).json(session);
         } catch (error) {
             res.status(500).json({ message: "Internal server error" });
