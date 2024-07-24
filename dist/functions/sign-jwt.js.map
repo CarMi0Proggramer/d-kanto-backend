@@ -1,0 +1,1 @@
+{"version":3,"file":"sign-jwt.js","sourceRoot":"","sources":["../../src/functions/sign-jwt.ts"],"names":[],"mappings":";;;;;AAEA,0BAUC;AAZD,gEAA+B;AAE/B,SAAgB,OAAO,CAAC,IAAY;IAChC,MAAM,KAAK,GAAG,sBAAG,CAAC,IAAI,CAClB,IAAI,EACJ,OAAO,CAAC,GAAG,CAAC,cAAc,EAC1B;QACI,SAAS,EAAE,IAAI;KAClB,CACJ,CAAC;IAEF,OAAO,KAAK,CAAC;AACjB,CAAC"}
