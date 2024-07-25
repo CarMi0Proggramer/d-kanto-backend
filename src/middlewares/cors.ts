@@ -7,7 +7,9 @@ export const corsMiddleware = () => cors({
             "http://localhost:5174",
             "http://localhost:4173",
             "https://d-kanto-frontend.onrender.com",
-            "https://d-kanto-admin.onrender.com"
+            "https://d-kanto-admin.onrender.com",
+            "https://d-kanto-admin.netlify.app",
+            "https://d-kanto-frontend.netlify.app",
         ]
 
         if (Accepted_Origins.includes(origin) || !origin) {
