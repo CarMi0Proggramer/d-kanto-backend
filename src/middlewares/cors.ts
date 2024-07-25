@@ -13,6 +13,7 @@ export const corsMiddleware = () => cors({
             return callback(null, true);
         }
 
+        console.log(origin);
         return callback(new Error("Not allowed by CORS"));
     },
     credentials: true
