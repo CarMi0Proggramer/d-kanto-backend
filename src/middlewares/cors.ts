@@ -4,10 +4,7 @@ export const corsMiddleware = () => cors({
     origin: (origin, callback) => {
         const Accepted_Origins = [
             "http://localhost:5173",
-            "http://localhost:5174",
             "http://localhost:4173",
-            "https://d-kanto-frontend.onrender.com",
-            "https://d-kanto-admin.onrender.com",
             "https://d-kanto-admin.netlify.app",
             "https://d-kanto-frontend.netlify.app",
         ]
