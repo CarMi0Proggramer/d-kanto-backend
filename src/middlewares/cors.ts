@@ -12,13 +12,8 @@ export const corsMiddleware = () => cors({
         if (Accepted_Origins.includes(origin) || !origin) {
             return callback(null, true);
         }
-
-        console.log(Accepted_Origins.includes(origin));
         
-        console.log(origin);
-        
-
-        return callback(new Error("Not allowed by CORS"));
+        return callback(new Error(`Not allowed by CORS ${origin} ${Accepted_Origins.includes(origin)}`));
     },
     credentials: true
 })
