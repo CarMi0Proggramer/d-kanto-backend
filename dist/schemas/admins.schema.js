@@ -14,7 +14,6 @@ exports.adminSchema = zod_1.default.object({
     company_key: zod_1.default.string().min(1, { message: "Company Password is required" })
 });
 function validateAdmin(data) {
-    /* validating data */
     const result = exports.adminSchema.safeParse(data);
     if (!result.success) {
         return JSON.parse(result.error.message);
@@ -25,7 +24,6 @@ function validateAdmin(data) {
     return result.data;
 }
 function validatePartialAdmin(data) {
-    /* validating partial data */
     const result = exports.adminSchema.partial().safeParse(data);
     if (!result.success) {
         return JSON.parse(result.error.message);

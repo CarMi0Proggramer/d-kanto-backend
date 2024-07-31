@@ -8,7 +8,6 @@ const userSchema = z.object({
 
 export function validateUser(data: any) {
     const result = userSchema.safeParse(data);
-
     if (!result.success) {
         return JSON.parse(result.error.message);
     }
@@ -18,7 +17,6 @@ export function validateUser(data: any) {
 
 export function validatePartialUser(data: any) {
     const result = userSchema.partial().safeParse(data);
-
     if (!result.success) {
         return JSON.parse(result.error.message);
     }

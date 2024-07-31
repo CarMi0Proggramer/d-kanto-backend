@@ -9,7 +9,7 @@ class ProductModel {
         return products;
     }
     static async getById(id) {
-        const product = await app_data_source_1.myDataSource.getRepository(product_entity_1.Product).findOne({ where: { id: id } });
+        const product = await app_data_source_1.myDataSource.getRepository(product_entity_1.Product).findOneBy({ id: id });
         return product;
     }
     static async create(data) {
@@ -22,12 +22,12 @@ class ProductModel {
     }
     static async update(id, data) {
         const productRepository = app_data_source_1.myDataSource.getRepository(product_entity_1.Product);
-        const product = await productRepository.findOne({ where: { id: id } });
+        const product = await this.getById(id);
         if (!product) {
             return false;
         }
         await productRepository.update({ id: id }, data);
-        const updatedProduct = await productRepository.findOne({ where: { id: id } });
+        const updatedProduct = await this.getById(id);
         return updatedProduct;
     }
 }

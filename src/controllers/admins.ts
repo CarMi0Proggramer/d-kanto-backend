@@ -8,7 +8,6 @@ import { signJWT } from "../functions/sign-jwt";
 
 export class AdminController {
     static async signUp(req: Request, res: Response) {
-        /* VALIDATING DATA */
         const result = validateAdmin(req.body);
         if (result == false) {
             return res.status(400).json({ message: "Invalid Company Key" });
@@ -17,14 +16,11 @@ export class AdminController {
         }
 
         try {
-            /* EXTRACTING DATA */
             let { name, password, email } = result;
             password = await bcrypt.hash(password, 10);
 
-            /* SIGNING UP */
             const admin = await AdminModel.signUp({ name, email, password });
 
-            /* IF ADMIN ALREADY EXISTS */
             if (!admin) {
                 return res.status(400).json({ message: "Your email is already registered, try to sign in" });
             }
@@ -36,9 +32,7 @@ export class AdminController {
     }
 
     static async signIn(req: Request, res: Response) {
-        /* PARSING DATA */
         const result = validatePartialAdmin(req.body);
-        /* IF IT DOESN'T SUCCEED */
         if (result == false) {
             return res.status(400).json({ message: "Invalid Company Key" });
         } else if (!result.email) {
@@ -46,23 +40,18 @@ export class AdminController {
         }
 
         try {
-            /* EXTRACTING REQUIRED DATA */
             let { email, password } = result;
 
-            /* LOOKING FOR THE ADMIN */
-            const admin = await AdminModel.getByEmail({ email });
-            /* IF THE ADMIN DOESN'T EXIST */
+            const admin = await AdminModel.getByEmail(email);
             if (!admin) {
                 return res.status(404).json({ message: "Not found" });
             }
 
-            /* COMPARING PASSWORDS */
             const passed = await bcrypt.compare(password, admin.password);
             if (!passed) {
                 return res.status(400).json({ message: "Invalid Password" });
             }
 
-            /* SIGNING JWT */
             const token = signJWT({ name: admin.name, email: admin.email });
 
             res.status(200).cookie("access_token", token, {
@@ -77,6 +66,6 @@ export class AdminController {
     }
 
     static async logOut(req: Request, res: Response){
-        res.clearCookie("access_token").json({ message: "Logged out successfuly"});
+        res.clearCookie("access_token").json({ message: "Logged out successfully"});
     }
 }

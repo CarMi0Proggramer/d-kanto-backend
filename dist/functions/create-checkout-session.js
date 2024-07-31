@@ -11,8 +11,8 @@ async function createCheckoutSession(lineItems) {
         mode: "payment",
         payment_method_types: ["card"],
         line_items: getLineItems(lineItems),
-        success_url: "https://d-kanto-frontend.onrender.com/src/pages/success.html",
-        cancel_url: "https://d-kanto-frontend.onrender.com/src/pages/cancel.html",
+        success_url: "https://d-kanto.onrender.com/src/pages/success.html",
+        cancel_url: "https://d-kanto.onrender.com/src/pages/cancel.html",
     });
     return session;
 }

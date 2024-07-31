@@ -23,7 +23,6 @@ class UserController {
             if (!passed) {
                 return res.status(400).json({ message: "Invalid Password" });
             }
-            /* SIGNING JWT */
             const token = (0, sign_jwt_1.signJWT)({ name: user.name, email: user.email });
             res.status(200).cookie("access_token", token, {
                 httpOnly: true,
@@ -47,7 +46,6 @@ class UserController {
             if (!user) {
                 return res.status(400).json({ message: "Your email is already registered, try to sign in" });
             }
-            /* SIGNING JWT */
             const token = (0, sign_jwt_1.signJWT)({ name: user.name, email: user.email });
             res.status(201).cookie("access_token", token, {
                 httpOnly: true,

@@ -7,7 +7,7 @@ export class AdminModel {
         email: string;
         password: string;
     }) {
-        const result = await myDataSource.getRepository(Admin).findOneBy({ email: data.email });
+        const result = await this.getByEmail(data.email);
         if (result) {
             return false;
         }
@@ -16,10 +16,10 @@ export class AdminModel {
         return admin;
     }
 
-    static async getByEmail(data: { email: string }) {
+    static async getByEmail(email: string) {
         const admin = await myDataSource
             .getRepository(Admin)
-            .findOneBy({ email: data.email });
+            .findOneBy({ email: email });
         if (!admin) {
             return false;
         }

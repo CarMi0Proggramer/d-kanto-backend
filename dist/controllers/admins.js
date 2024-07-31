@@ -10,7 +10,6 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const sign_jwt_1 = require("../functions/sign-jwt");
 class AdminController {
     static async signUp(req, res) {
-        /* VALIDATING DATA */
         const result = (0, admins_schema_1.validateAdmin)(req.body);
         if (result == false) {
             return res.status(400).json({ message: "Invalid Company Key" });
@@ -19,12 +18,9 @@ class AdminController {
             return res.status(400).json(result);
         }
         try {
-            /* EXTRACTING DATA */
             let { name, password, email } = result;
             password = await bcrypt_1.default.hash(password, 10);
-            /* SIGNING UP */
             const admin = await admin_1.AdminModel.signUp({ name, email, password });
-            /* IF ADMIN ALREADY EXISTS */
             if (!admin) {
                 return res.status(400).json({ message: "Your email is already registered, try to sign in" });
             }
@@ -35,9 +31,7 @@ class AdminController {
         }
     }
     static async signIn(req, res) {
-        /* PARSING DATA */
         const result = (0, admins_schema_1.validatePartialAdmin)(req.body);
-        /* IF IT DOESN'T SUCCEED */
         if (result == false) {
             return res.status(400).json({ message: "Invalid Company Key" });
         }
@@ -45,20 +39,15 @@ class AdminController {
             return res.status(400).json(result);
         }
         try {
-            /* EXTRACTING REQUIRED DATA */
             let { email, password } = result;
-            /* LOOKING FOR THE ADMIN */
-            const admin = await admin_1.AdminModel.getByEmail({ email });
-            /* IF THE ADMIN DOESN'T EXIST */
+            const admin = await admin_1.AdminModel.getByEmail(email);
             if (!admin) {
                 return res.status(404).json({ message: "Not found" });
             }
-            /* COMPARING PASSWORDS */
             const passed = await bcrypt_1.default.compare(password, admin.password);
             if (!passed) {
                 return res.status(400).json({ message: "Invalid Password" });
             }
-            /* SIGNING JWT */
             const token = (0, sign_jwt_1.signJWT)({ name: admin.name, email: admin.email });
             res.status(200).cookie("access_token", token, {
                 httpOnly: true,
@@ -72,7 +61,7 @@ class AdminController {
         }
     }
     static async logOut(req, res) {
-        res.clearCookie("access_token").json({ message: "Logged out successfuly" });
+        res.clearCookie("access_token").json({ message: "Logged out successfully" });
     }
 }
 exports.AdminController = AdminController;

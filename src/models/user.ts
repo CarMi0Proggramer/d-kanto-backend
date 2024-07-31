@@ -12,7 +12,7 @@ export class UserModel {
         email: string , 
         password: string,
     }){
-        const user  = await myDataSource.getRepository(User).findOneBy({ email: data.email });
+        const user  = await this.getByEmail(data.email);
         if (user) {
             return false;
         }

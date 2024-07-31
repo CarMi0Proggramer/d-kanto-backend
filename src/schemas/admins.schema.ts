@@ -8,7 +8,6 @@ export const adminSchema = z.object({
 });
 
 export function validateAdmin(data: any){
-    /* validating data */
     const result = adminSchema.safeParse(data);
     
     if (!result.success) {
@@ -21,7 +20,6 @@ export function validateAdmin(data: any){
 }
 
 export function validatePartialAdmin(data: any) {
-    /* validating partial data */
     const result = adminSchema.partial().safeParse(data);
 
     if (!result.success) {

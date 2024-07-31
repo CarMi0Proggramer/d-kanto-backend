@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.productSchema = void 0;
+exports.validateProduct = validateProduct;
+exports.validatePartialProduct = validatePartialProduct;
 const zod_1 = require("zod");
 exports.productSchema = zod_1.z.object({
     name: zod_1.z.string().min(1, { message: "Name is required" }),
@@ -17,4 +19,18 @@ exports.productSchema = zod_1.z.object({
         .max(5, { message: "Rating must be between 0 and 5" }).default(5),
     stock: zod_1.z.number().positive({ message: "Stock must be a positive number" }).min(1, { message: "Stock must be at least 1" })
 });
+function validateProduct(data) {
+    const result = exports.productSchema.safeParse(data);
+    if (!result.success) {
+        return JSON.parse(result.error.message);
+    }
+    return result.data;
+}
+function validatePartialProduct(data) {
+    const result = exports.productSchema.partial().safeParse(data);
+    if (!result.success) {
+        return JSON.parse(result.error.message);
+    }
+    return result.data;
+}
 //# sourceMappingURL=products.schema.js.map

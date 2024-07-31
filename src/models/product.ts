@@ -8,7 +8,7 @@ export class ProductModel {
     }
 
     static async getById(id: number){
-        const product = await myDataSource.getRepository(Product).findOne({where: {id: id}});
+        const product = await myDataSource.getRepository(Product).findOneBy({id: id});
         return product;
     }
 
@@ -24,13 +24,14 @@ export class ProductModel {
 
     static async update(id: number, data: any){
         const productRepository = myDataSource.getRepository(Product);
-        const product = await productRepository.findOne({where: {id: id}});
+
+        const product = await this.getById(id);
         if (!product) {
             return false;
         }
         await productRepository.update({id: id}, data);
 
-        const updatedProduct = await productRepository.findOne({where: {id: id}});
+        const updatedProduct = await this.getById(id);
         return updatedProduct;
     }
 }

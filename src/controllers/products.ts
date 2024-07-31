@@ -1,7 +1,7 @@
 
 import { Request, Response } from "express"
 import { ProductModel } from "../models/product";
-import { productSchema } from "../schemas/products.schema";
+import { validatePartialProduct, validateProduct } from "../schemas/products.schema";
 
 export class ProductController  {
     static async getAll(req: Request, res: Response){
@@ -32,12 +32,12 @@ export class ProductController  {
     }
 
     static async create(req:Request, res: Response) {
-        const result = productSchema.safeParse(req.body);
-        if (!result.success) {
-            return res.status(400).json({message: JSON.parse(result.error.message)});
+        const data = validateProduct(req.body);
+        if (!data.name) {
+            return res.status(400).json({message: data});
         }
         try {
-            const product = await ProductModel.create(result.data);
+            const product = await ProductModel.create(data);
             res.status(201).json(product);
         }catch(error){
             res.status(500).json({
@@ -61,14 +61,15 @@ export class ProductController  {
     }
 
     static async update( req: Request, res: Response){
-        const result = productSchema.partial().safeParse(req.body);
-        if (!result.success) {
-            return res.status(400).json({message: JSON.parse(result.error.message)})
+        const data = validatePartialProduct(req.body);
+        if (!data.name) {
+            return res.status(400).json({message: data})
         }
+
         let { id } = req.params;
     
         try {
-            const product = await ProductModel.update(Number(id), result.data);
+            const product = await ProductModel.update(Number(id), data);
             if (!product) {
                 return res.status(404).json({message: "Product doesn't exist"});
             }

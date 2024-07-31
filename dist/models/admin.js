@@ -5,17 +5,17 @@ const app_data_source_1 = require("../app-data-source");
 const admin_entity_1 = require("../entity/admin.entity");
 class AdminModel {
     static async signUp(data) {
-        const result = await app_data_source_1.myDataSource.getRepository(admin_entity_1.Admin).findOneBy({ email: data.email });
+        const result = await this.getByEmail(data.email);
         if (result) {
             return false;
         }
         const admin = await app_data_source_1.myDataSource.getRepository(admin_entity_1.Admin).save(data);
         return admin;
     }
-    static async getByEmail(data) {
+    static async getByEmail(email) {
         const admin = await app_data_source_1.myDataSource
             .getRepository(admin_entity_1.Admin)
-            .findOneBy({ email: data.email });
+            .findOneBy({ email: email });
         if (!admin) {
             return false;
         }

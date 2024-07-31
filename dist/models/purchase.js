@@ -12,8 +12,8 @@ class PurchaseModel {
         return purchases;
     }
     static async create(userEmail, items, total_amount) {
-        const user = await user_1.UserModel.getByEmail(userEmail);
         const purchase = new purchase_entity_1.Purchase();
+        const user = await user_1.UserModel.getByEmail(userEmail);
         purchase.user = user;
         purchase.total_amount = total_amount;
         const purchaseProducts = (0, create_purchase_products_1.createPurchaseProducts)(items, purchase);

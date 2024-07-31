@@ -34,12 +34,12 @@ class ProductController {
         }
     }
     static async create(req, res) {
-        const result = products_schema_1.productSchema.safeParse(req.body);
-        if (!result.success) {
-            return res.status(400).json({ message: JSON.parse(result.error.message) });
+        const data = (0, products_schema_1.validateProduct)(req.body);
+        if (!data.name) {
+            return res.status(400).json({ message: data });
         }
         try {
-            const product = await product_1.ProductModel.create(result.data);
+            const product = await product_1.ProductModel.create(data);
             res.status(201).json(product);
         }
         catch (error) {
@@ -64,13 +64,13 @@ class ProductController {
         }
     }
     static async update(req, res) {
-        const result = products_schema_1.productSchema.partial().safeParse(req.body);
-        if (!result.success) {
-            return res.status(400).json({ message: JSON.parse(result.error.message) });
+        const data = (0, products_schema_1.validatePartialProduct)(req.body);
+        if (!data.name) {
+            return res.status(400).json({ message: data });
         }
         let { id } = req.params;
         try {
-            const product = await product_1.ProductModel.update(Number(id), result.data);
+            const product = await product_1.ProductModel.update(Number(id), data);
             if (!product) {
                 return res.status(404).json({ message: "Product doesn't exist" });
             }

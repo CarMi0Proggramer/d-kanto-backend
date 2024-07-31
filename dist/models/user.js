@@ -9,7 +9,7 @@ class UserModel {
         return user;
     }
     static async signUp(data) {
-        const user = await app_data_source_1.myDataSource.getRepository(user_entity_1.User).findOneBy({ email: data.email });
+        const user = await this.getByEmail(data.email);
         if (user) {
             return false;
         }
