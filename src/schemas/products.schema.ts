@@ -1,4 +1,4 @@
-import { SafeParseSuccess, z } from "zod";
+import { z } from "zod";
 
 export const productSchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
