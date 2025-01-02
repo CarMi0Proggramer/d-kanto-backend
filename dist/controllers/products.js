@@ -7,12 +7,7 @@ class ProductController {
     static async getAll(req, res) {
         try {
             const products = await product_1.ProductModel.getAll();
-            if (products.length === 0) {
-                res.status(404).json({ message: "No products found" });
-            }
-            else {
-                res.status(200).json(products);
-            }
+            res.json(products);
         }
         catch (error) {
             res.status(500).json({ message: "Internal Server error" });
@@ -44,7 +39,7 @@ class ProductController {
         }
         catch (error) {
             res.status(500).json({
-                message: "Internal server error"
+                message: "Internal server error",
             });
         }
     }
@@ -72,7 +67,9 @@ class ProductController {
         try {
             const product = await product_1.ProductModel.update(Number(id), data);
             if (!product) {
-                return res.status(404).json({ message: "Product doesn't exist" });
+                return res
+                    .status(404)
+                    .json({ message: "Product doesn't exist" });
             }
             res.status(200).json(product);
         }
